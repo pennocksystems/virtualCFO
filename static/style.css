@@ -1,0 +1,212 @@
+/* Base */
+body {
+  font-family: 'Exo 2', Arial, sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #dce3ee);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Only center the login page */
+body.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login container */
+.login-container {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  text-align: center;
+  width: 340px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+.login-container h1 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+}
+
+.login-container h1 span {
+  color: #2563eb;
+}
+
+/* Form */
+input, button {
+  width: 100%;
+  height: 48px; /* fixed height for symmetry */
+  margin: 0.6rem 0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  box-sizing: border-box; /* ensures padding doesn’t affect width */
+}
+
+/* Inputs */
+input {
+  padding: 0 0.75rem; /* horizontal padding only since height is fixed */
+  border: 1px solid #cbd5e1;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+/* Button */
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+/* Flash messages */
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.flashes li {
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.success { background: #d1fae5; color: #065f46; }
+.danger { background: #fee2e2; color: #991b1b; }
+.warning { background: #fef9c3; color: #854d0e; }
+.info    { background: #dbeafe; color: #1e3a8a; }
+
+/* Footer */
+footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+footer .brand {
+  font-weight: 600;
+  color: #2563eb;
+  font-family: 'Exo 2', sans-serif;
+}
+
+/* DASHBOARD */
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background: #1e293b;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: flex-end; /* 👈 pushes links to the right */
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #f1f5f9;
+  margin-left: 1.5rem; /* spacing between items */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #93c5fd;
+}
+
+/* Dashboard content */
+.dashboard-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: left;
+  box-sizing: border-box; /* keeps padding inside */
+}
+
+.dashboard-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #1e293b;
+}
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Dashboard Cards */
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #1e293b;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card ul li {
+  margin-bottom: 0.5rem;
+  color: #334155;
+}
+
+/* Wide card for emphasis */
+.card.wide {
+  grid-column: span 2;
+}
+
+/* Chart canvas sizing */
+.card canvas {
+  width: 100% !important;
+  height: 250px !important;
+}
+
+/* Make Payroll chart taller */
+#payrollChart {
+  height: 350px !important;
+}

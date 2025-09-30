@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>r21m | Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Reports</a>
+      <a href="#">Agent</a>
+      <a href="#">Profile</a>
+    </div>
+  </nav>
+
+  <!-- Dashboard Content -->
+  <main class="dashboard-grid">
+    <!-- Current Balance -->
+    <section class="card wide">
+      <h2>Current Balance</h2>
+      <p><strong>$120,450</strong></p>
+      <p>Runway: ~6 weeks at current spend</p>
+    </section>
+
+    <!-- Pending Expenses -->
+    <section class="card">
+      <h2>Pending Expenses</h2>
+      <ul>
+        <li>Payroll – $40,000 (due 10/31)</li>
+        <li>Vendor A – $12,000 (due 11/05)</li>
+        <li>Insurance – $2,500 (due 11/10)</li>
+      </ul>
+    </section>
+
+    <!-- Revenue vs Expenses Chart -->
+    <section class="card">
+      <h2>Revenue vs Expenses</h2>
+      <canvas id="revExpChart"></canvas>
+    </section>
+
+    <!-- Cash Flow Forecast Chart -->
+    <section class="card">
+      <h2>Cash Flow Forecast</h2>
+      <canvas id="cashFlowChart"></canvas>
+    </section>
+
+    <!-- Top Vendors -->
+    <section class="card">
+      <h2>Top Vendors</h2>
+      <canvas id="vendorChart"></canvas>
+    </section>
+
+    <!-- Payroll Insights -->
+    <section class="card">
+      <h2>Payroll Insights</h2>
+      <canvas id="payrollChart"></canvas>
+    </section>
+
+    <!-- Alerts -->
+    <section class="card">
+      <h2>Alerts</h2>
+      <ul>
+        <li>⚠️ Expenses trending 15% higher than last 3 months</li>
+        <li>⚠️ Cash balance projected below $5k in May</li>
+      </ul>
+    </section>
+
+    <!-- Key Ratios -->
+    <section class="card">
+      <h2>Key Metrics</h2>
+      <ul>
+        <li>Net Cash Flow: +$7,500</li>
+        <li>Payroll: 52% of expenses</li>
+        <li>Vendors: 30% of expenses</li>
+        <li>Savings vs LY: +12%</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Chart.js Demo Scripts -->
+  <script>
+    // Revenue vs Expenses
+    const revExpCtx = document.getElementById('revExpChart').getContext('2d');
+    new Chart(revExpCtx, {
+      type: 'bar',
+      data: {
+        labels: ['June', 'July', 'August', 'September', 'October'],
+        datasets: [
+          {
+            label: 'Revenue',
+            data: [45000, 52000, 48000, 60000, 58000],
+            backgroundColor: '#2563eb'
+          },
+          {
+            label: 'Expenses',
+            data: [38000, 40000, 42000, 45000, 50000],
+            backgroundColor: '#ef4444'
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Cash Flow Forecast
+    const cashFlowCtx = document.getElementById('cashFlowChart').getContext('2d');
+    new Chart(cashFlowCtx, {
+      type: 'line',
+      data: {
+        labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+        datasets: [
+          {
+            label: 'Cash Balance',
+            data: [120000, 95000, 72000, 50000, 3000],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,0.2)',
+            fill: true,
+            tension: 0.3
+          }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Top Vendors
+    const vendorCtx = document.getElementById('vendorChart').getContext('2d');
+    new Chart(vendorCtx, {
+      type: 'bar',
+      data: {
+        labels: ['AWS', 'Salesforce', 'Office Lease', 'Insurance', 'Google Workspace'],
+        datasets: [{
+          label: 'Monthly Spend ($)',
+          data: [5200, 2100, 8000, 2500, 600],
+          backgroundColor: '#f59e0b'
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Payroll Insights
+    const payrollCtx = document.getElementById('payrollChart').getContext('2d');
+    new Chart(payrollCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Salaries', 'Benefits', 'Taxes'],
+        datasets: [{
+          data: [32000, 6000, 2000],
+          backgroundColor: ['#2563eb', '#10b981', '#f43f5e']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+  </script>
+</body>
+</html>
