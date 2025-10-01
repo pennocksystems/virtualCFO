@@ -210,3 +210,179 @@ footer .brand {
 #payrollChart {
   height: 350px !important;
 }
+
+/* =============== AGENT LAYOUT =============== */
+.agent-layout {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 1.5rem;
+}
+
+/* Sidebar */
+.agent-sidebar {
+  flex: 1;
+  max-width: 280px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-sidebar h2 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.5rem;
+  color: #1e293b;
+}
+
+.agent-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.agent-sidebar li {
+  margin-bottom: 0.5rem;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+/* Suggested question buttons */
+.suggest-btn {
+  display: block;
+  width: 100%;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.suggest-btn:hover {
+  background: #1e40af;
+}
+
+/* =============== CHAT CARD =============== */
+.chat-container {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  height: 75vh;
+  overflow: visible; /* don't clip the input bar focus ring */
+}
+
+/* Chat Window */
+.chat-window {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 12px 12px 0 0; /* rounded top of the chat area */
+}
+
+/* Messages */
+.message {
+  max-width: 70%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.message.agent {
+  background: #e2e8f0;
+  align-self: flex-start;
+  color: #1e293b;
+}
+
+.message.user {
+  background: #2563eb;
+  color: white;
+  align-self: flex-end;
+}
+
+/* Input row: two columns (input box + button) */
+.chat-input {
+  display: grid;
+  grid-template-columns: 1fr auto; /* input grows, button sizes to content */
+  align-items: center;
+  gap: 12px;                        /* space between input and button */
+  margin: 12px 16px 16px;           /* shows rounded top of input box */
+  border: 0;                        /* no border on the whole row */
+  background: transparent;
+}
+
+/* The rounded, highlightable INPUT BOX only */
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;              /* round top + bottom of input box */
+  overflow: hidden;                 /* tidy inner edges */
+}
+
+/* Symmetric focus ring around the input box (not the button) */
+.input-group:focus-within {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35);
+  border-color: #93c5fd;
+}
+
+/* Actual input */
+.input-group input {
+  flex: 1;
+  min-width: 0;                     /* prevents overflow in grid */
+  padding: 0.9rem 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 0;                 /* wrapper owns corners */
+}
+
+/* Neutralize any global input focus styles */
+.input-group input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: transparent !important;
+}
+
+/* Send button — separate chip with its own rounding */
+.send-btn {
+  height: 48px;
+  padding: 0 18px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;              /* independent rounded corners */
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.send-btn:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+/* Optional: smaller on narrow screens */
+@media (max-width: 768px) {
+  .chat-input { margin: 12px; }
+  .send-btn { height: 44px; }
+}
+

@@ -22,7 +22,6 @@ def login():
 
         if username in users and check_password_hash(users[username], password):
             session["user"] = username
-            # Removed "Login successful!" flash
             return redirect(url_for("dashboard"))
         else:
             flash("Invalid username or password", "danger")
@@ -34,6 +33,27 @@ def dashboard():
         flash("Please log in first", "warning")
         return redirect(url_for("login"))
     return render_template("dashboard.html", user=session["user"])
+
+@app.route("/agent")
+def agent():
+    if "user" not in session:
+        flash("Please log in first", "warning")
+        return redirect(url_for("login"))
+    return render_template("agent.html", user=session["user"])
+
+@app.route("/reports")
+def reports():
+    if "user" not in session:
+        flash("Please log in first", "warning")
+        return redirect(url_for("login"))
+    return render_template("reports.html", user=session["user"])
+
+@app.route("/profile")
+def profile():
+    if "user" not in session:
+        flash("Please log in first", "warning")
+        return redirect(url_for("login"))
+    return render_template("profile.html", user=session["user"])
 
 @app.route("/logout")
 def logout():

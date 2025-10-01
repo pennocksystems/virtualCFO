@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>r21m | Virtual CFO Agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="{{ url_for('reports') }}">Reports</a>
+      <a href="{{ url_for('agent') }}">Agent</a>
+      <a href="{{ url_for('profile') }}">Profile</a>
+    </div>
+  </nav>
+
+  <!-- Agent Workspace -->
+  <div class="agent-layout">
+    <!-- Sidebar -->
+    <aside class="agent-sidebar">
+      <h2>Quick Metrics</h2>
+      <ul>
+        <li><strong>Balance:</strong> $120,450</li>
+        <li><strong>Payroll:</strong> $40,000 (due 10/31)</li>
+        <li><strong>Runway:</strong> 6 weeks</li>
+      </ul>
+
+      <h2>Suggested Questions</h2>
+      <button class="suggest-btn">Do I have enough for payroll?</button>
+      <button class="suggest-btn">When will I run out of cash?</button>
+      <button class="suggest-btn">Can I hire a new employee?</button>
+      <button class="suggest-btn">What expenses are trending?</button>
+
+      <h2>Alerts</h2>
+      <ul>
+        <li>⚠ Expenses trending 15% ↑ last 3 months</li>
+        <li>⚠ Vendor bill $12k due Nov 5</li>
+      </ul>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="chat-container">
+      <div class="chat-window" id="chat-window">
+        <!-- Initial agent message -->
+        <div class="message agent">
+          <p>Hello 👋 I’m your Virtual CFO. How can I help you today?</p>
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <form class="chat-input" id="chat-form">
+  <div class="input-group">
+    <input
+      type="text"
+      id="user-input"
+      placeholder="Ask me about payroll, cash flow, or hiring..."
+      autocomplete="off"
+      required
+    />
+  </div>
+  <button type="submit" class="send-btn">Send</button>
+</form>
+    </main>
+  </div>
+
+  <!-- Chat Script -->
+  <script src="{{ url_for('static', filename='chat.js') }}"></script>
+  <script>
+    // Suggested question buttons auto-fill input
+    document.querySelectorAll('.suggest-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('user-input').value = btn.textContent;
+        document.getElementById('user-input').focus();
+      });
+    });
+  </script>
+</body>
+</html>
