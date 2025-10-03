@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>r21m | Reports</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="{{ url_for('dashboard') }}">Home</a>
+      <a href="{{ url_for('reports') }}">Reports</a>
+      <a href="{{ url_for('agent') }}">Agent</a>
+      <a href="{{ url_for('profile') }}">Profile</a>
+    </div>
+  </nav>
+
+  <!-- Reports Workspace -->
+  <div class="reports-layout">
+    <!-- Sidebar: Explore + What-If -->
+    <aside class="panel">
+      <h2>Explore</h2>
+
+      <div class="control">
+        <label for="reportSelect">Report</label>
+        <select id="reportSelect">
+          <option value="revexp" selected>Revenue vs Expenses</option>
+          <option value="cash">Cash Balance Forecast</option>
+          <option value="vendors">Top Vendors</option>
+          <option value="payroll">Payroll Insights</option>
+        </select>
+      </div>
+
+      <div class="control" id="ctrlTimeRange">
+        <label for="timeRange">Time Range</label>
+        <select id="timeRange">
+          <option value="6">Last 6 months</option>
+          <option value="12" selected>Last 12 months</option>
+          <option value="24">Last 24 months (simulated)</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <h2>What-If</h2>
+
+      <!-- Rev/Exp + Hire controls (for Revenue vs Expenses & Cash) -->
+      <div id="ctrlRevExp">
+        <div class="control">
+          <label for="revGrowth">Revenue growth adjustment</label>
+          <div class="range-row">
+            <input type="range" id="revGrowth" min="-30" max="30" step="1" value="0">
+            <span class="range-badge"><span id="revGrowthVal">0</span>%</span>
+          </div>
+          <small>Applies to future months in view.</small>
+        </div>
+
+        <div class="control">
+          <label for="expGrowth">Expense growth adjustment</label>
+          <div class="range-row">
+            <input type="range" id="expGrowth" min="-30" max="30" step="1" value="0">
+            <span class="range-badge"><span id="expGrowthVal">0</span>%</span>
+          </div>
+          <small>Applies to future months in view.</small>
+        </div>
+
+        <div class="control">
+          <label>Add new hire (monthly cost)</label>
+          <div class="inline">
+            <input type="number" id="hireCost" min="0" step="100" value="0" placeholder="e.g., 4000">
+            <select id="hireStart">
+              <option value="0" selected>Start next month</option>
+              <option value="1">In 2 months</option>
+              <option value="2">In 3 months</option>
+              <option value="3">In 4 months</option>
+            </select>
+          </div>
+          <small>Approx. all-in cost (salary + taxes/benefits).</small>
+        </div>
+      </div>
+
+      <!-- Vendors control -->
+      <div id="ctrlVendors" class="hidden">
+        <div class="control">
+          <label for="vendorAdj">Adjust vendor spend</label>
+          <div class="range-row">
+            <input type="range" id="vendorAdj" min="-50" max="50" step="1" value="0">
+            <span class="range-badge"><span id="vendorAdjVal">0</span>%</span>
+          </div>
+          <small>Simulates renegotiation/cancellations across vendors.</small>
+        </div>
+      </div>
+
+      <!-- Payroll controls -->
+      <div id="ctrlPayroll" class="hidden">
+        <div class="control">
+          <label for="payrollSal">Salaries adjustment</label>
+          <div class="range-row">
+            <input type="range" id="payrollSal" min="-30" max="30" step="1" value="0">
+            <span class="range-badge"><span id="payrollSalVal">0</span>%</span>
+          </div>
+        </div>
+        <div class="control">
+          <label for="payrollBen">Benefits adjustment</label>
+          <div class="range-row">
+            <input type="range" id="payrollBen" min="-30" max="30" step="1" value="0">
+            <span class="range-badge"><span id="payrollBenVal">0</span>%</span>
+          </div>
+        </div>
+        <div class="control">
+          <label for="payrollTax">Taxes adjustment</label>
+          <div class="range-row">
+            <input type="range" id="payrollTax" min="-30" max="30" step="1" value="0">
+            <span class="range-badge"><span id="payrollTaxVal">0</span>%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-btns">
+        <button id="runScenario" class="btn-primary">Run</button>
+        <button id="resetScenario" class="btn-ghost">Reset</button>
+      </div>
+    </aside>
+
+    <!-- Main: Chart + Insights -->
+    <main class="report-main">
+      <section class="card">
+        <div class="report-header">
+          <h2 id="reportTitle">Revenue vs Expenses</h2>
+          <div class="kpis" id="kpiRow"></div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="reportChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Insights</h2>
+        <ul id="insightsList"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Scenario Summary</h2>
+        <p id="scenarioSummary">No adjustments applied.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='reports.js') }}"></script>
+</body>
+</html>
